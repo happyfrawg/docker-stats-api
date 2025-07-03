@@ -9,8 +9,10 @@ struct ContainerStats: Identifiable, Decodable {
 }
 
 struct ContentView: View {
+    private let savedAPIKey = "SavedAPIAddress"
+
     @State private var containerStats: [ContainerStats] = [] // Holds container stats
-    @State private var apiAddress: String = "http://127.0.0.1:5005/stats?api_key=123abc" // Default API address
+    @State private var apiAddress: String = UserDefaults.standard.string(forKey: "SavedAPIAddress") ?? "http://127.0.0.1:5005/stats?api_key=123abc" // Default or saved API address
     private let refreshInterval = 5.0 // Refresh container stats every 5 seconds
 
     var body: some View {
@@ -49,6 +51,9 @@ struct ContentView: View {
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .foregroundColor(.primary)
                 .padding(.bottom, 8)
+                .onChange(of: apiAddress) { newValue in
+                    UserDefaults.standard.set(newValue, forKey: savedAPIKey)
+                }
         }
     }
 
