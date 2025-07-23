@@ -3,6 +3,8 @@ Docker CPU API Backend
 
 A Flask-based REST API to fetch real-time stats (CPU and Memory usage) for running Docker containers. This API extracts stats using the docker stats command and provides the data in JSON format.
 
+![Screen Shot](screenshot-image-1.png)
+
 Features
 --------
 
